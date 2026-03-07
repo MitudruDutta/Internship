@@ -1,56 +1,61 @@
-# Data Science & Machine Learning Internship Portfolio
+# Data Science and Machine Learning Internship Portfolio
 
-This repository contains the projects and tasks completed during a comprehensive Data Science and Machine Learning internship. The work spans across data analysis, SQL querying, and an end-to-end machine learning application deployment.
+This repository collects the work completed across the internship in three business contexts:
 
-The repository is structured into distinct weeks, each focusing on different skill sets and business domains.
+- `Week 1`: Nova Mart FMCG promotion analysis using Python, Pandas, Matplotlib, and Seaborn.
+- `Week 2`: statistical analysis in Python and EV market SQL query debugging.
+- `Week 3 and 4`: the CodeX beverage pricing project, covering cleaning, feature engineering, modeling, MLflow tracking, and deployment.
 
----
+Each week solves a different client-style problem, so the repository is better read as a set of project deliverables than as a single application.
 
-## 📁 Repository Structure
+## Projects
 
-### 🔹 Week 1: FMCG Promotion Analysis (Nova Mart)
-This week focused on analyzing promotional campaign performance for an FMCG brand to answer client-facing business questions using data visualization and KPI-based insights.
-- **Core KPIs**: Analyzed Incremental Revenue (IR%) and Incremental Sold Units (ISU%).
-- **Key Deliverables**: 
-  - Explored which cities and product categories responded best to specific promotional campaigns (e.g., Diwali, Sankranti).
-  - Evaluated the effectiveness of various promo types (BOGOF, 50% Off, Cashback) on volume versus revenue.
-- **Tech Stack**: Python, Pandas, Matplotlib, Seaborn, Jupyter Notebooks.
+### Week 1: Nova Mart promotion analysis
 
-### 🔹 Week 2: E-Commerce Analytics & EV Sales SQL Analysis
-This week was split into two distinct analytical tasks:
-- **Task 1: E-commerce Customer Analysis (Python)**
-  - Analyzed customer demographics, spending habits, and site engagement.
-  - Explored factors affecting the *cross-sell conversion rate* to understand how likely a customer is to buy extra products.
-- **Task 2: Electric Vehicle (EV) Market Analysis (SQL)**
-  - Executed advanced SQL queries to analyze EV sales data across Indian states and manufacturers.
-  - Computed financial and market metrics such as *Penetration Rate* and *Compound Annual Growth Rate (CAGR)* across different fiscal years.
+The first week focuses on promotional effectiveness for an FMCG client. The work answers operational questions such as store coverage by city, campaign lift during Diwali and Sankranti, category contribution, and promo-level revenue or unit growth.
 
-### 🔹 Week 3 and 4: CodeX Beverage Price Prediction (End-to-End ML)
-The capstone project involved building a complete Machine Learning solution to predict the optimal price range for a new energy drink based on consumer survey responses.
-- **Data Pipeline**: Cleaned raw survey data and engineered derived features (e.g., Health Concern scores, Brand Awareness).
-- **Modeling**: Trained and evaluated various classification models (LightGBM, XGBoost, Random Forest, SVM) and tracked experiments using MLflow.
-- **Deployment**: 
-  - Developed a **FastAPI** backend to serve the serialized LightGBM model.
-  - Built an interactive **Streamlit** frontend allowing users to input consumer profiles and instantly receive pricing predictions along with model confidence probabilities.
-- **Tech Stack**: Scikit-Learn, LightGBM, MLflow, FastAPI, Streamlit, Pandas.
+Core business metrics used throughout the analysis:
 
----
+- `IR%`: incremental revenue percentage
+- `ISU%`: incremental sold units percentage
 
-## 🚀 How to Run the Projects
+Primary files:
 
-1. **Clone the repository** and navigate to the project root.
-2. **Create a virtual environment** and install dependencies:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-   pip install -r requirements.txt
-   ```
-3. **Navigating the Code**:
-   - For **Week 1 & 2** (Analysis): Open Jupyter Notebook (`jupyter notebook`) and navigate to the respective `.ipynb` files.
-   - For **Week 3 and 4** (CodeX Project Web App): Navigate to the `Week 3 and 4/CodeX Project` directory and follow the instructions in its specific `README.md` to start the FastAPI server and Streamlit frontend.
+- [Week 1/README.md](Week%201/README.md)
+- `Week 1/Task 1/task1.ipynb`
+- `Week 1/Task 2/task2.ipynb`
 
----
+### Week 2: statistics and SQL debugging
 
-## 📝 Notes & Data Privacy
-- Raw datasets, specific client instruction PDFs, and database dump files are intentionally excluded via `.gitignore` to maintain confidentiality and reduce repository size.
-- Presentation scripts and helper files generated during the process are also untracked to keep the repository clean.
+The second week combines two different tasks:
+
+- a Python notebook that answers descriptive and inferential statistics questions on e-commerce customer behavior
+- a SQL debugging exercise that fixes broken EV market queries and validates market metrics such as penetration rate and CAGR
+
+Primary files:
+
+- [Week 2/README.md](Week%202/README.md)
+- `Week 2/Task 1/task1.ipynb`
+- `Week 2/Task 2/sql/fixed_sql_queries.sql`
+
+### Week 3 and 4: CodeX beverage pricing
+
+The final phase builds an end-to-end machine learning solution for beverage price-range prediction. It includes survey cleaning, engineered features, model comparison, MLflow logging, a serialized LightGBM model artifact, a FastAPI inference service, and a Streamlit demo app.
+
+Primary files:
+
+- [Week 3 and 4/README.md](Week%203%20and%204/README.md)
+- [Week 3 and 4/CodeX Project/README.md](Week%203%20and%204/CodeX%20Project/README.md)
+
+## How to work with this repository
+
+1. Create a Python environment.
+2. Install dependencies with `pip install -r requirements.txt`.
+3. Open the week you want to review and start from that directory's `README.md`.
+4. Run notebooks in Jupyter for analysis tasks.
+5. Run `uvicorn` and `streamlit` only for the CodeX deployment work in Week 3 and 4.
+
+## Notes
+
+- Some client instruction PDFs, presentation helpers, and generated assets are intentionally excluded from version control or kept local only.
+- The repository contains both notebook-based analysis and deployable application code, so commands differ by week.

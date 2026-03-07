@@ -9,3 +9,8 @@ scikit-learn
 xgboost
 lightgbm
 mlflow
+joblib
+requests
+fastapi
+uvicorn
+streamlit

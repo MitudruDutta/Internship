@@ -1,51 +1,97 @@
-# CodeX Energy Drink Pricing Prediction
+# CodeX Beverage Price Prediction
 
-This project is a comprehensive Machine Learning solution developed to predict the optimal price range for energy drinks based on consumer survey responses. It encompasses the entire data lifecycle: from data cleaning and feature engineering to predictive modeling and deployment via an interactive web application.
+This project predicts the expected price range of an energy drink from consumer survey responses. It covers the full workflow from raw survey cleanup to model deployment.
 
-## Project Structure
+## Problem statement
 
-- **`dataset/`**: Contains the raw, cleaned, and feature-engineered survey data (ignored in version control).
-- **`datacleaning.ipynb`**: Notebook detailing the procedures for handling missing values, outliers, and formatting the raw survey data.
-- **`featureengineering.ipynb`**: Notebook focusing on creating new derived features (like `cf_ab_score`, `zas_score`, and `bsi`) to improve model performance.
-- **`model.ipynb`**: Notebook exploring various classification models (LightGBM, XGBoost, Random Forest, etc.) to determine the best approach for price prediction.
-- **`mlflow_tracking.py`**: Script for logging model parameters, metrics, and artifacts using MLflow for experiment tracking.
-- **`backend/`**:
-  - **`fastapi_app.py`**: A FastAPI application that serves the best performing LightGBM model as a REST API endpoint (`/predict`).
-  - **`model_helper.py`**: A helper module that preprocesses incoming raw data using the same mappings defined during feature engineering and runs inference using the serialized model.
-- **`app.py`**: An interactive Streamlit frontend that provides a user-friendly form to input consumer demographics, habits, and preferences, and displays the predicted price range along with class probabilities.
-- **`artifacts/`**: Directory containing the serialized `.pkl` LightGBM model utilized by the backend.
+The business goal is to estimate which price band a respondent is most likely to accept. The target variable is `price_range`, and the current implementation treats this as a multi-class classification problem.
 
-## Setup and Installation
+The survey captures demographics, purchase behavior, brand awareness, packaging preference, health concerns, and consumption context. Those attributes are cleaned, transformed, and then used to predict one of these ranges:
 
-1. Ensure you have Python installed and your virtual environment activated.
-2. Install the necessary dependencies (refer to the main repository `requirements.txt`).
-3. If you need to retrain the model, you can run:
-   ```bash
-   python backend/model_helper.py --force-retrain
-   ```
+- `50-100`
+- `100-150`
+- `150-200`
+- `200-250`
 
-## Running the Application
+## Workflow
 
-The application is split into a FastAPI backend and a Streamlit frontend. They should be run in separate terminal sessions.
+### 1. Data cleaning
 
-### 1. Start the FastAPI Backend
+`datacleaning.ipynb` prepares the survey data by handling nulls, category standardization, and data quality issues based on the instructions and metadata.
+
+### 2. Feature engineering
+
+`featureengineering.ipynb` creates the derived fields used in modeling:
+
+- `age_group`
+- `cf_ab_score`
+- `zas_score`
+- `bsi`
+
+The notebook also removes logical outliers before exporting the model-ready dataset.
+
+### 3. Predictive modeling
+
+`model.ipynb` compares multiple classifiers, including LightGBM, XGBoost, Random Forest, SVM, Logistic Regression, and Gaussian Naive Bayes.
+
+Based on the saved comparison results in `dataset/mlflow_model_comparison_results.csv`, the best-performing model is `LGBMClassifier` with accuracy of about `0.9278`.
+
+### 4. MLflow tracking
+
+`mlflow_tracking.py` logs model parameters, metrics, reports, and the best-model summary. It supports local MLflow tracking and DagsHub-compatible tracking URIs.
+
+### 5. Deployment
+
+The deployed setup has three components:
+
+- `backend/model_helper.py`: builds engineered features from raw request payloads, loads the serialized model, and returns prediction probabilities
+- `backend/fastapi_app.py`: exposes the prediction API
+- `app.py`: Streamlit front end for entering respondent details and showing predicted price range plus class probabilities
+
+The current serialized model artifact is:
+
+- `artifacts/lgbm_price_model.pkl`
+
+## Key files
+
+- `dataset/survey_results.csv`
+- `dataset/survey_results_cleaned.csv`
+- `dataset/survey_results_feature_engineered.csv`
+- `datacleaning.ipynb`
+- `featureengineering.ipynb`
+- `model.ipynb`
+- `mlflow_tracking.py`
+- `backend/model_helper.py`
+- `backend/fastapi_app.py`
+- `app.py`
+
+## How to run
+
+From the repository root, install dependencies:
+
 ```bash
-# From the CodeX Project directory
+pip install -r requirements.txt
+```
+
+From `Week 3 and 4/CodeX Project`, retrain or regenerate the model artifact if needed:
+
+```bash
+python backend/model_helper.py --force-retrain
+```
+
+Start the FastAPI server:
+
+```bash
 uvicorn backend.fastapi_app:app --host 0.0.0.0 --port 8000
 ```
-The API will be available at `http://localhost:8000`.
 
-### 2. Start the Streamlit Frontend
+Start the Streamlit app in a second terminal:
+
 ```bash
-# From the CodeX Project directory
 streamlit run app.py
 ```
-The web interface will open in your default browser at `http://localhost:8501`.
 
-## Features
-- Dynamic form matching the features required by the predictive model.
-- Immediate prediction of the optimal price range (`50-100`, `100-150`, `150-200`, `200-250`).
-- Visual bar chart representing the confidence probabilities across all possible price ranges.
+## Notes
 
-## Instructions & Demos
-*Note: Some instruction PDFs and demo GIFs are ignored from version control to save space.*
+- `streamlit_app_demo.gif` and `ml_flow_output_demo.png` are local reference assets for the app and MLflow output.
+- The API expects the same raw survey fields used in the Streamlit form, and the helper handles engineered features internally before inference.
