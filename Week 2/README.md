@@ -1,50 +1,57 @@
-# Week 2: E-Commerce Analytics & Electric Vehicle Market Analysis
+# Week 2: Statistical Analysis and EV SQL Debugging
 
-This directory contains two distinct data analysis tasks completed during the second week of the internship. The tasks focus on deriving actionable business insights using Python (Pandas) and SQL.
+Week 2 contains two separate tasks. The first is a Python notebook for statistics-based client questions. The second is a SQL debugging task for EV sales analysis.
 
----
+## Task 1: statistical analysis in Python
 
-## 📁 Task 1: E-Commerce Customer Analysis (Python)
+`Task 1/task1.ipynb` answers a sequence of client-request questions on e-commerce customer behavior. The notebook covers:
 
-### 📌 Overview
-This task analyzes customer behavior data from an e-commerce platform. The goal is to understand demographics, spending patterns, and identify key drivers for cross-selling success.
+- age range
+- mean, median, and mode of amount spent
+- variance and standard deviation of time spent on site
+- interquartile range of amount spent
+- correlation between purchases and time spent
+- z-score calculation
+- skewness
+- probability questions
+- confidence interval estimation
+- conditional probability for high cross-sell conversion
 
-### 🎯 Key Objectives
-- Analyze customer demographics (Age, Gender) and their correlation with purchasing behavior.
-- Investigate the relationship between the time spent on the website and the average monthly amount spent.
-- Evaluate the **Cross-Sell Conversion Rate**, which indicates the probability of a customer purchasing additional items after an initial purchase.
+Supporting local files:
 
-### 🛠️ Tech Stack & Files
-- **Tools**: Python, Pandas, Matplotlib, Seaborn
-- **Main Notebook**: `Task 1/task1.ipynb`
-- **Data Attributes**: Customer ID, Gender, Age, Number of Purchases, Amount Spent, Time Spent on Site, Cross-Sell Conversion Rate.
+- `Task 1/datasets/ecommerce_data.csv`
+- `Task 1/meta_data.txt`
+- `Task 1/client_requests.pdf`
 
----
+## Task 2: EV sales SQL debugging
 
-## 📁 Task 2: Electric Vehicle (EV) Market Analysis (SQL)
+`Task 2/sql/fixed_sql_queries.sql` contains corrected versions of the broken intern SQL queries. The task works on the EV sales database dump and covers:
 
-### 📌 Overview
-This task involves querying a relational database (`ev_sales_db`) to analyze the rapidly growing Electric Vehicle market in India. The analysis covers both 2-wheeler and 4-wheeler categories across different states and manufacturers.
+- maker counts by vehicle category
+- top makers by fiscal year
+- monthly average vehicle sales
+- state penetration rate ranking
+- highest and lowest sales states
+- peak and low season months
+- CAGR for top makers
+- penetration category classification by state
 
-### 🎯 Key Objectives
-- Identify top-performing EV manufacturers (makers) across different fiscal years.
-- Calculate and analyze key market metrics:
-  - **Penetration Rate**: The percentage of total vehicles sold that are electric `(Electric Vehicles Sold / Total Vehicles Sold) * 100`.
-  - **Compound Annual Growth Rate (CAGR)**: Evaluating the year-over-year sales growth of top manufacturers.
-- Analyze geographical trends to see which states lead in EV adoption.
+Supporting local files:
 
-### 🛠️ Tech Stack & Files
-- **Tools**: SQL (MySQL/PostgreSQL compatible)
-- **Queries File**: `Task 2/sql/fixed_sql_queries.sql`
-- **Database Schema**:
-  - `electric_vehicle_sales_by_state`: Sales data aggregated by state and vehicle category.
-  - `electric_vehicle_sales_by_makers`: Sales data aggregated by manufacturer and vehicle category.
-  - `dim_date`: Date dimension table including fiscal years and quarters.
+- `Task 2/sql/ev_sales_db.sql`
+- `Task 2/sql_queries.docx`
+- `Task 2/meta_data.txt`
 
----
+## How to run
 
-## 🚀 How to Run
-- **For Task 1**: Navigate to the `Task 1` folder and run `jupyter notebook task1.ipynb`.
-- **For Task 2**: Import the SQL dump (if available) into your preferred SQL RDBMS and execute the queries found in `Task 2/sql/fixed_sql_queries.sql`.
+For Task 1:
 
-*Note: Raw datasets and database dumps have been excluded from this repository via `.gitignore`.*
+1. Install dependencies from the repository root with `pip install -r requirements.txt`.
+2. Start Jupyter with `jupyter notebook`.
+3. Open `Task 1/task1.ipynb`.
+
+For Task 2:
+
+1. Load `Task 2/sql/ev_sales_db.sql` into MySQL Workbench or another compatible SQL engine.
+2. Review the problem statements in `Task 2/sql_queries.docx`.
+3. Run the corrected queries in `Task 2/sql/fixed_sql_queries.sql`.
