@@ -71,7 +71,7 @@ streamlit run app.py
 ## Repository structure
 
 ```
-Internship/
+Data-Science-Internship/
 ├── Week 1/                     # Nova Mart FMCG promotion analysis
 │   ├── Task 1/task1.ipynb      #   client-request answers (IR%, ISU%, coverage)
 │   └── Task 2/task2.ipynb      #   presentation-ready charts
@@ -109,7 +109,7 @@ Each week solves a distinct client-style problem — read the repository as a se
 
 **Mitudru Dutta**
 - GitHub: [@MitudruDutta](https://github.com/MitudruDutta)
-- Project repo: [github.com/MitudruDutta/Internship](https://github.com/MitudruDutta/Internship)
+- Project repo: [github.com/MitudruDutta/Internship](https://github.com/MitudruDutta/Data-Science-Internship)
 
 ## Notes
 
